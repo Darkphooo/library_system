@@ -8,6 +8,24 @@
       // App component's scope.
       component: require('./components/home.vue')
     },
+    '/borrow': {
+      component: require('./components/borrow.vue')
+    },
+    '/return': {
+      component: require('./components/return.vue')
+    },
+    '/class/:id': {
+      name: 'class',
+      component: require('./components/classsearch.vue')
+    },
+    '/userdetail/:id': {
+      name: 'userdetail',
+      component: require('./components/userdetail.vue')
+    },
+    '/record/:id': {
+      name: 'record',
+      component: require('./components/userrecord.vue')
+    },
     // not found handler
     '*': {
       component: require('./components/home.vue')
