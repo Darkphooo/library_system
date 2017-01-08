@@ -2,30 +2,43 @@
   // normal routes
   router.map({
     // basic example
-    '/home': {
+    '/': {
       // the component can also be a plain string component id,
       // but a component with that id must be available in the
       // App component's scope.
-      component: require('./components/home.vue')
+      component: require('./components/home.vue'),
+      subRoutes: {
+        '': {
+          name: 'booklist',
+          component: require('./components/booklist.vue')
+        },
+        '/borrow': {
+          name: 'borrow',
+          component: require('./components/borrow.vue')
+        },
+        '/return': {
+          name: 'return',
+          component: require('./components/return.vue')
+        },
+        '/register': {
+          name: 'register',
+          component: require('./components/register.vue')
+        },
+        '/class/:id': {
+          name: 'class',
+          component: require('./components/classsearch.vue')
+        },
+        '/userdetail/:id': {
+          name: 'userdetail',
+          component: require('./components/userdetail.vue')
+        },
+        '/record/:id': {
+          name: 'record',
+          component: require('./components/userrecord.vue')
+        },
+      }
     },
-    '/borrow': {
-      component: require('./components/borrow.vue')
-    },
-    '/return': {
-      component: require('./components/return.vue')
-    },
-    '/class/:id': {
-      name: 'class',
-      component: require('./components/classsearch.vue')
-    },
-    '/userdetail/:id': {
-      name: 'userdetail',
-      component: require('./components/userdetail.vue')
-    },
-    '/record/:id': {
-      name: 'record',
-      component: require('./components/userrecord.vue')
-    },
+    
     // not found handler
     '*': {
       component: require('./components/home.vue')

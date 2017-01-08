@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <h3>书籍借阅</h3>
-        <table id="borrowTable"></table>
+        <h3>全部书籍</h3>
+        <table id="bookTable"></table>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
       }
     },
     ready: function () {
-      $('#borrowTable').bootstrapTable({
+      $('#bookTable').bootstrapTable({
         striped: true,
         // sidePagination: client,
         // pageNumber: 1,
@@ -46,10 +46,6 @@
         }, {
           field: 'storage_num',
           title: '库存数量'
-        }, {
-          field: 'borrow',
-          title: '借阅',
-          class: 'borrowbtn'
         }],
         data: [{
           bookid: 1,
@@ -68,11 +64,11 @@
           storage_time: '2017-01-06',
           storage_num: '11'
         }],
-      })
+      });
       function classFormatter (value) {
         switch (value) {
           case 1: 
-            return '教科书';
+            return '教科书'
           case 2:
             return '小说'
         }
