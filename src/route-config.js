@@ -12,10 +12,6 @@
           name: 'booklist',
           component: require('./components/booklist.vue')
         },
-        '/borrow': {
-          name: 'borrow',
-          component: require('./components/borrow.vue')
-        },
         '/return': {
           name: 'return',
           component: require('./components/return.vue')
@@ -29,7 +25,7 @@
           component: require('./components/classsearch.vue')
         },
         '/userdetail/:id': {
-          name: 'userdetail',
+          name: 'detail',
           component: require('./components/userdetail.vue')
         },
         '/record/:id': {

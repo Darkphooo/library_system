@@ -3,6 +3,13 @@
     <div class="row">
       <div class="col-xs-12">
         <h3>书籍归还</h3>
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="form-group">
+              <button class="btn btn-primary btn-md" @click="return">归还选中书籍</button>
+            </div>
+          </div>
+        </div>
         <table id="returnTable"></table>
       </div>
     </div>
@@ -25,6 +32,8 @@
         // pageNumber: 1,
         // pageSize: 20,
         columns: [{
+          radio: true
+        }, {
           field: 'bookid',
           title: '书籍编号'
         }, {
@@ -72,6 +81,11 @@
           case 2:
             return '小说'
         }
+      }
+    },
+    methods: {
+      return: function () {
+
       }
     }
   }  
