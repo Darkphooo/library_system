@@ -23,14 +23,25 @@
 </style>
 
 <script>
+import Vue from 'vue'
 export default {
   data() {
     return{
       islogin: false,
-      bookid: null,
-      bookname: null,
-      publisher: null,
-      author: null
+      userid: null,
+      username: null,
+      bbookid: null,
+      record: [],
+      check: null
+    }
+  },
+  route: {
+    data: function (transition) {
+      Vue.http.get('/api/returnlist&userid='+sessionStorage.getItem('userid')).then((response) => {
+        sessionStorage.setItem('record', response.data)
+      },
+      (response) => {
+      })
     }
   },
   ready: function () {
@@ -46,6 +57,7 @@ export default {
       method: "get", 
       url: "/api/booklistclass&classid="+vs.$route.params.id,
       search: true,
+      clickToSelect: true,
       sidePagination: 'client',
       pageNumber: 1,
       pageSize: 20,
@@ -93,7 +105,38 @@ export default {
   },
   methods: {
     borrow: function () {
-
+      this.bbookid = $('#bookTable').bootstrapTable('getSelections')[0].bookid
+      this.record = JSON.parse(sessionStorage.getItem('record'))
+      if (this.record.length === 0) {
+        this.check = true
+      } else {
+        for (var i = 0; i < this.record.length; i ++) {
+          if (this.bbookid === this.record[i].bookid) {
+            this.check = false
+            break
+          } else {
+            this.check = true
+          }
+        }
+      }
+      if (this.check === true) {
+        Vue.http.post('/api/borrowbook', {userid: this.userid, bookid: this.bbookid}).then((response) => {
+          if (response.data === 'success') {
+            alert('借书成功！')
+            location.reload()
+          } else if (response.data === 'fail') {
+            alert('借书失败！')
+          } else if (response.data === 'nomore') {
+            alert('该书已借完！')
+          } else if (response.data === 'reach the upper limit') {
+            alert('已达到借书上限！')
+          }
+        },
+        (response) => {
+        })
+      } else if (this.check === false) {
+        alert('您已借过相同的书籍')
+      }
     }
   }
 }  

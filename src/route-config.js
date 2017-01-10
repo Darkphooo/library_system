@@ -12,7 +12,7 @@
           name: 'booklist',
           component: require('./components/booklist.vue')
         },
-        '/return': {
+        '/return/:id': {
           name: 'return',
           component: require('./components/return.vue')
         },

@@ -120,12 +120,23 @@ export default {
   methods: {
     login: function () {
       this.loginerror = false
+      this.password = $.md5(this.password)
       Vue.http.post('/api/login', {username: this.username, password: this.password}).then((response) => {
         if (response.data !== 'fail') {
           this.islogin = true
           this.userid = response.data
           sessionStorage.setItem('userid', this.userid)
           sessionStorage.setItem('username', this.username)
+          Vue.http.get('/api/returnlist&userid='+this.userid).then((response) => {
+            sessionStorage.setItem('record', response.data)
+          },
+          (response) => {
+          })
+          if (this.$route.name === 'register') {
+            this.$router.go({ name: 'booklist' })
+          } else {
+            location.reload()
+          }
         } else if (response.data === 'fail') {
           this.loginerror = true
         }
@@ -136,6 +147,8 @@ export default {
     logout: function () {
       this.islogin = false
       sessionStorage.removeItem('username')
+      sessionStorage.removeItem('userid')
+      sessionStorage.removeItem('record')
       this.$router.go({ name: 'booklist' })
     },
     booklist: function () {
@@ -143,12 +156,13 @@ export default {
     },
     classsearch: function (id) {
       this.$router.go({ name: 'class', params: { id: id }})
+      location.reload()
     },
     borrow: function () {
       this.$router.go({ name: 'borrow' })
     },
     return: function () {
-      this.$router.go({ name: 'return' })
+      this.$router.go({ name: 'return', params: { id: this.userid }})
     },
     register: function () {
       this.$router.go({ name: 'register' })

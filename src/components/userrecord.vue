@@ -59,9 +59,9 @@ export default {
       }],
     }); 
     function isreturnFormatter (value) {
-      if (value === true) {
+      if (value === '1') {
         return '是'
-      } else if (value === false) {
+      } else if (value === '0') {
         return '否'
       }
     }
