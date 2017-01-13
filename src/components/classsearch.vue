@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-xs-4">
             <div class="form-group">
-              <button class="btn btn-primary btn-md" @click="borrow" v-if="islogin">借阅选中书籍</button>
+              <button class="btn btn-primary btn-md" @click="borrow" v-if="islogin">借阅选中 书籍</button>
             </div>
           </div>
         </div>
